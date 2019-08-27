@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1028, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Personal Logbook</title>
+  </head>
+  <body>
+    <div>
+      <h1>Personal Logbook</h1>
+    </div>
+    <div class="message-form">
+      <form>
+        <div>
+          <label for="msg">Message:</label>
+          <textarea type="msg" id="logItem"></textarea>
+          <button type="button" id="postLogItem">Log</button>
+        </div>
+      </form>
+    </div>
+    <div class="log-items"></div>
+  </body>
+  <footer>
+    <script>
+      const button = document.getElementById("postLogItem");
+      const logForm = document.getElementById("logItem");
+
+      async function populateLogHistory() {
+        const list = await fetch("/logs").then(function(response) {
+          return response.json();
+        });
+        const container = document.getElementsByClassName("log-items")[0];
+        container.innerHTML = "";
+        list.forEach(function(item) {
+          var logItemDiv = document.createElement("div");
+          logItemDiv.className = "log-item";
+          var logItemDateDiv = document.createElement("div");
+          logItemDateDiv.innerHTML = item.__data__.timestamp;
+          logItemDateDiv.className = "log-item-date";
+          var logItemTextDiv = document.createElement("div");
+          logItemTextDiv.innerHTML = item.__data__.content;
+          logItemTextDiv.className = "log-item-content";
+          logItemDiv.appendChild(logItemDateDiv);
+          logItemDiv.appendChild(logItemTextDiv);
+          container.appendChild(logItemDiv);
+        });
+      }
+      populateLogHistory();
+
+      button.addEventListener("click", async _ => {
+        try {
+          const response = await fetch("/logs", {
+            method: "post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              text: logForm.value
+            })
+          });
+          logForm.value = "";
+          populateLogHistory();
+        } catch (err) {
+          console.error(`Error: ${err}`);
+        }
+      });
+    </script>
+  </footer>
+</html>
