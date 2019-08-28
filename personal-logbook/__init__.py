@@ -2,6 +2,7 @@ from model import LogItem, Item
 from fastapi import FastAPI
 import uvicorn
 from starlette.responses import HTMLResponse
+import humanize
 
 app = FastAPI()
 
@@ -17,6 +18,8 @@ async def store_log(item: Item):
 @app.get("/logs")
 async def get_logs():
     items = list(LogItem.select().order_by(LogItem.id.desc()))
+    for item in items:
+        item.timestamp = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
     return items
 
 
