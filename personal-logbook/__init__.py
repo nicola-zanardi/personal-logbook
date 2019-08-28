@@ -19,10 +19,11 @@ async def get_logs():
     items = list(LogItem.select().order_by(LogItem.id.desc()))
     return items
 
+
 @app.get("/", response_class=HTMLResponse)
 async def read_items():
     with open("view/index.html") as html_index:
         return html_index.read()
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
+    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")

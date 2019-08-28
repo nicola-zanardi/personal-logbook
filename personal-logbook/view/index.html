@@ -27,7 +27,7 @@
       const logForm = document.getElementById("logItem");
 
       async function populateLogHistory() {
-        const list = await fetch("/logs").then(function(response) {
+        const list = await fetch("https://hopsu.ddns.net/logbook/logs").then(function(response) {
           return response.json();
         });
         const container = document.getElementsByClassName("log-items")[0];
@@ -50,7 +50,7 @@
 
       button.addEventListener("click", async _ => {
         try {
-          const response = await fetch("/logs", {
+          const response = await fetch("https://hopsu.ddns.net/logbook/logs", {
             method: "post",
             headers: {
               Accept: "application/json",
