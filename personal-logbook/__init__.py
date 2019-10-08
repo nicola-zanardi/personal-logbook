@@ -12,12 +12,13 @@ async def store_log(item: Item):
     print(item)
     item = LogItem(content=item.text)
     item.save()
+    item.timestamp = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
     return item
 
 
 @app.get("/logs")
-async def get_logs():
-    items = list(LogItem.select().order_by(LogItem.id.desc()))
+async def get_logs(page=1,):
+    items = list(LogItem.select().order_by(LogItem.id.desc()).paginate(int(page)))
     for item in items:
         item.timestamp = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
     return items

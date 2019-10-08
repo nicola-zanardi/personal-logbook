@@ -68,13 +68,18 @@
     <script>
       const button = document.getElementById("postLogItem");
       const logForm = document.getElementById("logItem");
+      var page = 0;
+      var inProgress = 0;
 
       async function populateLogHistory() {
-        const list = await fetch("https://hopsu.ddns.net/logbook/logs").then(function (response) {
+        page = page + 1;
+        const list = await fetch("https://hopsu.ddns.net/logbook/logs?page="+page).then(function (response) {
           return response.json();
         });
         const container = document.getElementsByClassName("log-items")[0];
-        container.innerHTML = "";
+        if (!list.length) {
+          page = -1
+        }
         list.forEach(function (item) {
           var logItemDiv = document.createElement("div");
           logItemDiv.className = "log-item";
@@ -91,6 +96,21 @@
       }
       populateLogHistory();
 
+      async function addLogItem(item) {
+        const container = document.getElementsByClassName("log-items")[0];
+        var logItemDiv = document.createElement("div");
+        logItemDiv.className = "log-item";
+        var logItemDateDiv = document.createElement("div");
+        logItemDateDiv.innerHTML = item.__data__.timestamp;
+        logItemDateDiv.className = "log-item-date";
+        var logItemTextDiv = document.createElement("div");
+        logItemTextDiv.innerHTML = item.__data__.content;
+        logItemTextDiv.className = "log-item-content";
+        logItemDiv.appendChild(logItemDateDiv);
+        logItemDiv.appendChild(logItemTextDiv);
+        container.insertBefore(logItemDiv, container.firstChild);
+      }
+
       button.addEventListener("click", async _ => {
         try {
           const response = await fetch("https://hopsu.ddns.net/logbook/logs", {
@@ -104,11 +124,24 @@
             })
           });
           logForm.value = "";
-          populateLogHistory();
+          responseJson = await response.json()
+          addLogItem(responseJson);
         } catch (err) {
           console.error(`Error: ${err}`);
         }
       });
+
+
+      window.onscroll = async function (ev) {
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && page > 0) {
+            // you're at the bottom of the page
+            if (inProgress == 0) {
+              inProgress = 1;
+              await populateLogHistory();
+              setTimeout(function () { inProgress = 0 }, 100);
+            }
+          }
+        };
     </script>
   </footer>
 
