@@ -1,8 +1,9 @@
-from model import LogItem, Item
-from fastapi import FastAPI
-import uvicorn
-from starlette.responses import HTMLResponse
 import humanize
+import markdown2
+import uvicorn
+from fastapi import FastAPI
+from model import Item, LogItem
+from starlette.responses import HTMLResponse
 
 app = FastAPI()
 
@@ -13,6 +14,7 @@ async def store_log(item: Item):
     item = LogItem(content=item.text)
     item.save()
     item.timestamp = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
+    item.content = markdown2.markdown(item.content)
     return item
 
 
@@ -21,6 +23,7 @@ async def get_logs(page=1,):
     items = list(LogItem.select().order_by(LogItem.id.desc()).paginate(int(page)))
     for item in items:
         item.timestamp = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
+        item.content = markdown2.markdown(item.content)
     return items
 
 
