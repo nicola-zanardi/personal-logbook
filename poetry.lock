@@ -67,6 +67,22 @@ version = "0.0.13"
 
 [[package]]
 category = "main"
+description = "python humanize utilities"
+name = "humanize"
+optional = false
+python-versions = "*"
+version = "0.5.1"
+
+[[package]]
+category = "main"
+description = "A fast and complete Python implementation of Markdown"
+name = "markdown2"
+optional = false
+python-versions = "*"
+version = "2.3.8"
+
+[[package]]
+category = "main"
 description = "a little orm"
 name = "peewee"
 optional = false
@@ -130,7 +146,7 @@ python-versions = ">=3.4"
 version = "7.0"
 
 [metadata]
-content-hash = "3819a6c666e56963c1750dfef6d3c73f538b6e50cdaee3d59bfce4197bc1abe5"
+content-hash = "ed940ef5b462fd8bff457c9d4176bba832733d666b50567560d89b3f1e86da74"
 python-versions = "^3.7.0"
 
 [metadata.hashes]
@@ -141,6 +157,8 @@ click = ["2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13", "5b
 fastapi = ["7fc78704e65e0936309ecf05f5898b49eecddd65805c3703b895019d48add53b", "aabdafad6368146df507354c6f07d9b5521af5685e31d79036225fceaba253ca"]
 h11 = ["acca6a44cb52a32ab442b1779adf0875c443c689e9e028f8d831a3769f9c5208", "f2b1ca39bfed357d1f19ac732913d5f9faa54a5062eca7d2ec3a916cfb7ae4c7"]
 httptools = ["e00cbd7ba01ff748e494248183abc6e153f49181169d8a3d41bb49132ca01dfc"]
+humanize = ["a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19"]
+markdown2 = ["7ff88e00b396c02c8e1ecd8d176cfa418fb01fe81234dcea77803e7ce4f05dbe", "882d3607fc023cdea0ac2cd0e1147617fcb0361cb1133d3ff095417f995ff270"]
 peewee = ["35bc7a1373b7e5c55fa984e852cddaff9e353a42cbb0b5e0c41a5060928fd192"]
 pydantic = ["0b7998c6e4106e57317a511a17ec8b3c99a20f037daa9687e2cffb48f20e36d3", "239a05529f01ff096e0b4b3ae8b0fd891dc1571ddca6fe4c013ed1c46646d8bf", "2408cbfd8aadf61a5a8062734615dc5f54bc01fcb37ad476260d0c8288915607", "427c0935683913a45ee5225ce4cd2ebbde376b7b06d4287f7f6c6d3158ef0408", "5b8900778c30e55ee418f6a375b922873d806232021ac0be13d0123fd922557b", "cb4351bae00636b59cdaafe75013955c3002f842878b93625f7a68202c8d218a"]
 starlette = ["849553e6dc8dd4faac5d4383219bdf49b199f3f09d60ce374c2a00a42ab7c77d"]
