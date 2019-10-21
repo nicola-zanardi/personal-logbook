@@ -1,7 +1,7 @@
 from peewee import SqliteDatabase, DateTimeField, CharField, Model
 import datetime
 
-db = SqliteDatabase("logbook.db")
+db = SqliteDatabase("../logbook.db")
 
 
 class LogItem(Model):

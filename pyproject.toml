@@ -1,16 +1,15 @@
 [tool.poetry]
-name = "personal-logging"
-version = "0.0.1"
+name = "logbook"
+version = "0.2.0"
 # description = ""
 authors = ["Nicola Zanardi <mildlyinteresting@posteo.net>"]
 
 [tool.poetry.dependencies]
 python = "^3.7.0"
 peewee = "^3.10.0"
-fastapi = "^0.36.0"
-uvicorn = "^0.8.6"
 markdown2 = "^2.3"
 humanize = "^0.5.1"
+flask = "^1.1"
 
 [tool.poetry.dev-dependencies]
 black = "^19.3b0"

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link
+    href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAj1Q7AP///wDVflgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABETMzMwAAAAERMzMzIAAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABESIiIiMAAAARMzMzMwD//wAA//8AAOAPAADgBwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADwAwAA"
+    rel="icon" type="image/x-icon" />
+  <title>Personal Logbook</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <div>
+    <h1>Personal Logbook</h1>
+  </div>
+  <div class="message-form">
+    <form action="/logs" method="post">
+      <div>
+        <textarea type="msg" placeholder="What's up?" name="text"></textarea>
+        <button type="submit">Log</button>
+      </div>
+    </form>
+  </div>
+  <div class="log-items">
+    {% for item in items %}
+    <div class="log-item">
+      <div class="log-item-date">{{ item.timestamp }}</div>
+      <div class="log-item-content">{{ item.content|safe }} </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+
+</html>
