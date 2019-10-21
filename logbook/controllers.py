@@ -20,6 +20,6 @@ def get_logs(page=1,):
         row[
             "timestamp"
         ] = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
-        row["content"] = markdown2.markdown(item.content).strip()
+        row["content"] = markdown2.markdown(item.content, extras=["fenced-code-blocks"]).strip()
         response.append(row)
     return response
