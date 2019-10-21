@@ -1,4 +1,8 @@
 .env
-__pycache__
 .vscode
-logbook.db
+venv/
+*.pyc
+*.egg-info/
+dist/
+settings.cfg
+*.log*
