@@ -10,6 +10,7 @@ peewee = "^3.10.0"
 markdown2 = "^2.3"
 humanize = "^0.5.1"
 flask = "^1.1"
+pygments = "^2.4"
 
 [tool.poetry.dev-dependencies]
 black = "^19.3b0"
