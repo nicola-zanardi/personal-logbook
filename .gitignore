@@ -6,3 +6,4 @@ venv/
 dist/
 settings.cfg
 *.log*
+logbook.db
