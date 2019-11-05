@@ -1,4 +1,14 @@
 .env
-__pycache__
 .vscode
+venv/
+*.pyc
+*.egg-info/
+dist/
+settings.cfg
+*.log*
 logbook.db
+logbook/static/gen
+.webassets-cache
+logbook/static/vendor/semantic-ui/src
+logbook/static/vendor/semantic-ui/tasks
+logbook/static/vendor/semantic-ui/gulpfile.js
