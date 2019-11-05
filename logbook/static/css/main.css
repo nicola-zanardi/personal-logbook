@@ -1,3 +1,4 @@
 #logform {
-  margin-top: calc(2.85714286em + 6px);
+  margin-top: calc(2.85714286em + 6px + 1em);
+  padding: 0;
 }
