@@ -12,7 +12,7 @@ def store_log():
     return redirect("/")
 
 
-def get_logs(page=1,):
+def get_logs(page=1):
     items = list(LogItem.select().order_by(LogItem.id.desc()).paginate(int(page)))
     response = []
     for item in items:
