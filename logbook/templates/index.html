@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="static\img\logo-dark.svg" rel="icon" type="image/x-icon" />
+  <link href="static/img/logo-dark.svg" rel="icon" type="image/x-icon" />
   <title>Personal Logbook</title>
   <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
   {% assets "main_css" %}
-  <link rel="stylesheet" href="{{ ASSET_URL }}" />
+  <link rel="stylesheet" href="{{ ASSET_URL[1:-1] }}" />
   {% endassets %}
 </head>
 
@@ -17,7 +17,7 @@
   <div class="ui fixed inverted borderless blue menu">
     <div class="ui container">
       <div class="item">
-        <img src="static\img\logo-light.svg">
+        <img src="static/img/logo-light.svg">
       </div>
       <div class="right item">
         <div class="ui icon input">
