@@ -7,7 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="static/img/logo-dark.svg" rel="icon" type="image/x-icon" />
   <title>Personal Logbook</title>
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
   {% assets "main_css" %}
   <link rel="stylesheet" href="{{ ASSET_URL[1:-1] }}" />
   {% endassets %}
@@ -31,7 +30,7 @@
     <!-- New log textarea -->
     <div id="logform" class="ui basic clearing segment">
       <div class="ui form">
-        <form action="/logs" method="post">
+        <form action="logs" method="post">
           <div class="field">
             <!-- <label>Text</label> -->
             <textarea type="msg" placeholder="What's up?" name="text"></textarea>
@@ -56,15 +55,6 @@
       </div>
       {% endfor %}
     </div>
-
-    <!-- <div class="ui  container">
-      {% for item in items %}
-      <div class="log-item">
-        <div class="log-item-date">{{ item.timestamp }}</div>
-        <div class="log-item-content">{{ item.content|safe }} </div>
-      </div>
-      {% endfor %}
-    </div> -->
   </div>
 </body>
 
