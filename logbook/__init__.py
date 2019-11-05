@@ -1,9 +1,20 @@
 import os
 from flask import Flask
+from flask_assets import Environment, Bundle
 
 app = Flask(__name__)
 app.config.from_object("logbook.default_settings")
 app.config.from_pyfile("../settings.cfg")
+
+assets = Environment(app)
+css = Bundle(
+    "vendor/semantic-ui/semantic.css",
+    "css/pygments.css",
+    "css/main.css",
+    filters="cleancss",
+    output="gen/main.css",
+)
+assets.register("main_css", css)
 
 if not app.debug:
     import logging

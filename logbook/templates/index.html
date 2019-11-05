@@ -9,28 +9,52 @@
     href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAj1Q7AP///wDVflgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABETMzMwAAAAERMzMzIAAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABESIiIiMAAAARMzMzMwD//wAA//8AAOAPAADgBwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADwAwAA"
     rel="icon" type="image/x-icon" />
   <title>Personal Logbook</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+  {% assets "main_css" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}" />
+  {% endassets %}
 </head>
 
 <body>
-  <div>
-    <h1>Personal Logbook</h1>
-  </div>
-  <div class="message-form">
-    <form action="/logs" method="post">
-      <div>
-        <textarea type="msg" placeholder="What's up?" name="text"></textarea>
-        <button type="submit">Log</button>
+  <h1 class="ui center aligned header">Personal Logbook</h1>
+  <div class="ui main container">
+    <!-- New log textarea -->
+    <div class="ui basic clearing segment">
+      <div class="ui form">
+        <form action="/logs" method="post">
+          <div class="field">
+            <!-- <label>Text</label> -->
+            <textarea type="msg" placeholder="What's up?" name="text"></textarea>
+          </div>
+          <button class="ui button primary right floated" type="submit">Log</button>
+          <button class="ui button right floated" type="submit">Clear</button>
+        </form>
       </div>
-    </form>
-  </div>
-  <div class="log-items">
-    {% for item in items %}
-    <div class="log-item">
-      <div class="log-item-date">{{ item.timestamp }}</div>
-      <div class="log-item-content">{{ item.content|safe }} </div>
     </div>
-    {% endfor %}
+
+    <!-- Logs -->
+    <div class="ui divided items">
+      {% for item in items %}
+      <div class="item">
+        <div class="content">
+          <div class="meta blue"><span>{{ item.timestamp }}</span></div>  
+          <!-- <div class="ui tiny header blue">{{ item.timestamp }}</div>   -->
+          <div class="description">
+            <p>{{ item.content|safe }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- <div class="ui  container">
+      {% for item in items %}
+      <div class="log-item">
+        <div class="log-item-date">{{ item.timestamp }}</div>
+        <div class="log-item-content">{{ item.content|safe }} </div>
+      </div>
+      {% endfor %}
+    </div> -->
   </div>
 </body>
 
