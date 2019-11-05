@@ -16,10 +16,23 @@
 </head>
 
 <body>
-  <h1 class="ui center aligned header">Personal Logbook</h1>
+  <div class="ui fixed inverted borderless blue menu">
+    <div class="ui container">
+      <div class="item">
+        <img
+          src="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAj1Q7AP///wDVflgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABETMzMwAAAAERMzMzIAAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABETMzMyMAAAERMzMzIwAAAREzMzMjAAABESIiIiMAAAARMzMzMwD//wAA//8AAOAPAADgBwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADgAwAA4AMAAOADAADwAwAA">
+      </div>
+      <div class="right item">
+        <div class="ui icon input">
+          <input type="text" placeholder="Search">
+          <i class="search icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="ui main container">
     <!-- New log textarea -->
-    <div class="ui basic clearing segment">
+    <div id="logform" class="ui basic clearing segment">
       <div class="ui form">
         <form action="/logs" method="post">
           <div class="field">
@@ -27,7 +40,7 @@
             <textarea type="msg" placeholder="What's up?" name="text"></textarea>
           </div>
           <button class="ui button primary right floated" type="submit">Log</button>
-          <button class="ui button right floated" type="submit">Clear</button>
+          <button class="ui button right floated" type="reset" value="Reset">Clear</button>
         </form>
       </div>
     </div>
@@ -37,7 +50,7 @@
       {% for item in items %}
       <div class="item">
         <div class="content">
-          <div class="meta blue"><span>{{ item.timestamp }}</span></div>  
+          <div class="meta blue"><span>{{ item.timestamp }}</span></div>
           <!-- <div class="ui tiny header blue">{{ item.timestamp }}</div>   -->
           <div class="description">
             <p>{{ item.content|safe }}</p>
