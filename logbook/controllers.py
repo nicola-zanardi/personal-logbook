@@ -20,6 +20,10 @@ def get_logs(page=1,):
         row[
             "timestamp"
         ] = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
-        row["content"] = markdown2.markdown(item.content, extras=["fenced-code-blocks"]).strip()
+        row["content"] = (
+            markdown2.markdown(item.content, extras=["fenced-code-blocks"])
+            .strip()
+            .replace("<img", '<img class="ui image"')
+        )
         response.append(row)
     return response
