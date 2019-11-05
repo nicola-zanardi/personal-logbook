@@ -1,61 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="static/img/logo-dark.svg" rel="icon" type="image/x-icon" />
+    <title>Personal Logbook</title>
+    {% assets "main_css" %}
+    <link rel="stylesheet" href="{{ ASSET_URL[1:-1] }}" />
+    {% endassets %}
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="static/img/logo-dark.svg" rel="icon" type="image/x-icon" />
-  <title>Personal Logbook</title>
-  {% assets "main_css" %}
-  <link rel="stylesheet" href="{{ ASSET_URL[1:-1] }}" />
-  {% endassets %}
-</head>
-
-<body>
-  <div class="ui fixed inverted borderless blue menu">
-    <div class="ui container">
-      <div class="item">
-        <img src="static/img/logo-light.svg">
-      </div>
-      <div class="right item">
-        <div class="ui icon input">
-          <input type="text" placeholder="Search">
-          <i class="search icon"></i>
+  <body>
+    <div id="navbar" class="ui fixed inverted borderless blue menu">
+      <div class="ui text container">
+        <div class="item">
+          <img src="static/img/logo-light.svg" />
+        </div>
+        <div class="right item">
+          <div class="ui icon input">
+            <input type="text" placeholder="Search" />
+            <i class="search icon"></i>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="ui text container">
     <!-- New log textarea -->
-    <div id="logform" class="ui basic clearing segment">
-      <div class="ui form">
-        <form action="logs" method="post">
-          <div class="field">
-            <!-- <label>Text</label> -->
-            <textarea type="msg" placeholder="What's up?" name="text"></textarea>
-          </div>
-          <button class="ui button primary right floated" type="submit">Log</button>
-          <button class="ui button right floated" type="reset" value="Reset">Clear</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Logs -->
-    <div class="ui divided items">
-      {% for item in items %}
-      <div class="item">
-        <div class="content">
-          <div class="meta blue"><span>{{ item.timestamp }}</span></div>
-          <!-- <div class="ui tiny header blue">{{ item.timestamp }}</div>   -->
-          <div class="description">
-            <p>{{ item.content|safe }}</p>
+    <div id="logform-segment" class="ui secondary segment">
+      <div class="ui text container">
+        <div id="logform" class="ui basic clearing segment">
+          <div class="ui form">
+            <form action="logs" method="post">
+              <div class="field">
+                <textarea
+                  type="msg"
+                  placeholder="What's up?"
+                  name="text"
+                ></textarea>
+              </div>
+              <button class="ui button primary right floated" type="submit">
+                Log
+              </button>
+              <button
+                class="ui button basic right floated"
+                type="reset"
+                value="Reset"
+              >
+                Clear
+              </button>
+            </form>
           </div>
         </div>
       </div>
-      {% endfor %}
     </div>
-  </div>
-</body>
 
+    <div class="ui text container">
+      <!-- Logs -->
+      <div class="ui divided items">
+        {% for item in items %}
+        <div class="item">
+          <div class="content">
+            <div class="meta blue">
+              <span>{{ item.timestamp }}</span>
+            </div>
+            <!-- <div class="ui tiny header blue">{{ item.timestamp }}</div>   -->
+            <div class="description">
+              <p>{{ item.content | safe }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
 </html>
