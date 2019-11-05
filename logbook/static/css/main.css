@@ -1,4 +1,15 @@
 #logform {
-  margin-top: calc(2.85714286em + 6px + 1em);
+  margin-top: calc(2.85714286em);
   padding: 0;
+}
+
+#navbar > div {
+  font-size: 1em;
+}
+
+#logform-segment {
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
 }
