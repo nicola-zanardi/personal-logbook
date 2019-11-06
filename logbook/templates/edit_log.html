@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="/static/img/logo-dark.svg" rel="icon" type="image/x-icon" />
+  <title>Personal Logbook</title>
+  {% assets "main_css" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}" />
+  {% endassets %}
+</head>
+
+<body>
+  <div id="navbar" class="ui fixed inverted borderless blue menu">
+    <div class="ui text container">
+      <a class="item" href="1"><img src="/static/img/logo-light.svg" /></a>
+    </div>
+  </div>
+
+  <!-- Edit log textarea -->
+  <div id="logform-segment" class="ui secondary segment">
+    <div class="ui text container">
+      <div id="logform" class="ui basic clearing segment">
+        <div class="ui form">
+          <form action="/logs/{{log_id}}/edit" method="post">
+            <div class="field">
+              <textarea type="msg" name="text">{{ content }}</textarea>
+            </div>
+            <button class="ui button positive right floated" type="submit">
+              Update Log
+            </button>
+            <a href="/">
+              <button class="ui button basic left floated">
+                Cancel
+              </button></a>
+          </form>
+          <form action="/logs/{{log_id}}/delete" method="post">
+            <button class="ui button negative right floated" type="submit">
+              Delete Log
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
