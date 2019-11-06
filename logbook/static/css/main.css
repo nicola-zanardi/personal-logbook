@@ -3,8 +3,9 @@
   padding: 0;
 }
 
-#navbar > div {
+#navbar > div.text.container {
   font-size: 1em;
+  max-width: calc(700px + 2 * 1.14286em) !important;
 }
 
 #logform-segment {
