@@ -1,10 +1,16 @@
 import os
-from flask import Flask
+from flask import Flask, Blueprint, redirect
 from flask_assets import Environment, Bundle
 
 app = Flask(__name__)
 app.config.from_object("logbook.default_settings")
 app.config.from_pyfile("../settings.cfg")
+
+# use blueprint to set base url
+logbook_bp = Blueprint(
+    "logbook", __name__, template_folder="templates", static_folder="static"
+)
+
 
 assets = Environment(app)
 css = Bundle(
@@ -12,7 +18,7 @@ css = Bundle(
     "css/pygments.css",
     "css/main.css",
     filters="cleancss",
-    output="gen/main.css",
+    output=f"{app.config['BASE_URL']}/gen/main.css",
 )
 assets.register("main_css", css)
 
@@ -31,3 +37,5 @@ if not app.debug:
     app.logger.addHandler(file_handler)
 
 from logbook import controllers, views
+
+app.register_blueprint(logbook_bp, url_prefix=f"/{app.config['BASE_URL']}")
