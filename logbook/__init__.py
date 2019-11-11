@@ -18,7 +18,7 @@ css = Bundle(
     "css/pygments.css",
     "css/main.css",
     filters="cleancss",
-    output=f"{app.config['BASE_URL']}/gen/main.css",
+    output="{}/gen/main.css".format(app.config["BASE_URL"]),
 )
 assets.register("main_css", css)
 
@@ -38,4 +38,4 @@ if not app.debug:
 
 from logbook import controllers, views
 
-app.register_blueprint(logbook_bp, url_prefix=f"/{app.config['BASE_URL']}")
+app.register_blueprint(logbook_bp, url_prefix="/{}".format(app.config["BASE_URL"]))
