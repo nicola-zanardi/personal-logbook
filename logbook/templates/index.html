@@ -1,85 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="static/img/logo-dark.svg" rel="icon" type="image/x-icon" />
-    <title>Personal Logbook</title>
-    {% assets "main_css" %}
-    <link rel="stylesheet" href="{{ ASSET_URL[1:-1] }}" />
-    {% endassets %}
-  </head>
 
-  <body>
-    <div id="navbar" class="ui fixed inverted borderless blue menu">
-      <div class="ui text container">
-        <a class="item" href="1"><img src="static/img/logo-light.svg"/></a>
-        <div class="right item">
-          <div class="ui icon input">
-            <input type="text" placeholder="Search" />
-            <i class="search icon"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- New log textarea -->
-    <div id="logform-segment" class="ui secondary segment">
-      <div class="ui text container">
-        <div id="logform" class="ui basic clearing segment">
-          <div class="ui form">
-            <form action="logs" method="post">
-              <div class="field">
-                <textarea
-                  type="msg"
-                  placeholder="What's up?"
-                  name="text"
-                ></textarea>
-              </div>
-              <button class="ui button primary right floated" type="submit">
-                Log
-              </button>
-              <button
-                class="ui button basic right floated"
-                type="reset"
-                value="Reset"
-              >
-                Clear
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="{{ url_for('logbook.static', filename='img/logo-dark.svg') }}" rel="icon" type="image/x-icon" />
+  <title>Personal Logbook</title>
+  {% assets "main_css" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}" />
+  {% endassets %}
+</head>
 
+<body>
+  <div id="navbar" class="ui fixed inverted borderless blue menu">
     <div class="ui text container">
-      <!-- Logs -->
-      <div class="ui divided items">
-        {% for item in items %}
-        <div class="item">
-          <div class="content">
-            <div class="meta blue">
-              <span>{{ item.timestamp }}</span>
-            </div>
-            <!-- <div class="ui tiny header blue">{{ item.timestamp }}</div>   -->
-            <div class="description">
-              <p>{{ item.content | safe }}</p>
-            </div>
-          </div>
+      <a class="item" href="{{ url_for('logbook.index_next_pages') }}">
+        <img src="{{ url_for('logbook.static', filename='img/logo-light.svg') }}" />
+      </a>
+      <div class="right item">
+        <div class="ui icon input">
+          <input type="text" placeholder="Search" />
+          <i class="search icon"></i>
         </div>
-        {% endfor %}
-      </div>
-      <div class="ui basic segment clearing padded">
-        {% if page_nr > 1 %}
-        <form action="{{ page_nr - 1 }}">
-          <button type="submit" class="ui left floated button">Newer</button>
-        </form>
-        {% endif %} {% if items|length == 20 %}
-        <form action="{{ page_nr + 1 }}">
-          <button type="submit" class="ui right floated button">Older</button>
-        </form>
-        {% endif %}
       </div>
     </div>
-  </body>
+  </div>
+  <!-- New log textarea -->
+  <div id="logform-segment" class="ui secondary segment">
+    <div class="ui text container">
+      <div id="logform" class="ui basic clearing segment">
+        <div class="ui form">
+          <form action="{{ url_for('logbook.store_log') }}" method="post">
+            <div class="field">
+              <textarea type="msg" placeholder="What's up?" name="text"></textarea>
+            </div>
+            <button class="ui button primary right floated" type="submit">
+              Log
+            </button>
+            <button class="ui button basic right floated" type="reset" value="Reset">
+              Clear
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui text container">
+    <!-- Logs -->
+    <div class="ui divided items">
+      {% for item in items %}
+      <div id="{{ item.id }}" class="item">
+        <div class="content">
+          <div class="meta blue">
+            <span>{{ item.timestamp }}</span>
+            <a class="right floated" href="{{ url_for('logbook.update_log_content', log_id = item.id) }}">EDIT</a>
+          </div>
+          <!-- <div class="ui tiny header blue">{{ item.timestamp }}</div>   -->
+          <div class="description">
+            <p>{{ item.content | safe }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="ui basic segment clearing padded">
+      {% if page_nr > 1 %}
+      <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr - 1) }}">
+        <button type="submit" class="ui left floated button">Newer</button>
+      </form>
+      {% endif %} {% if items|length == 20 %}
+      <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr + 1) }}">
+        <button type="submit" class="ui right floated button">Older</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</body>
+
 </html>

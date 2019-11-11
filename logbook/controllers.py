@@ -1,15 +1,15 @@
 import humanize
 from logbook.models import LogItem
-from logbook import app
+from logbook import logbook_bp
 import markdown2
-from flask import jsonify, request, redirect
+from flask import jsonify, request, redirect, url_for
 
 
-@app.route("/logs", methods=["POST"])
+@logbook_bp.route("/logs", methods=["POST"])
 def store_log():
     item = LogItem(content=request.form["text"])
     item.save()
-    return redirect("/")
+    return redirect(url_for("logbook.index_next_pages"))
 
 
 def get_logs(page=1):
@@ -17,6 +17,7 @@ def get_logs(page=1):
     response = []
     for item in items:
         row = {}
+        row["id"] = item.id
         row[
             "timestamp"
         ] = f'{item.timestamp.strftime("%m-%d-%Y %H:%M:%S")} ({humanize.naturaldelta(item.timestamp)} ago)'
@@ -27,3 +28,26 @@ def get_logs(page=1):
         )
         response.append(row)
     return response
+
+
+def get_log_content(log_id):
+    log = LogItem.get(LogItem.id == log_id)
+    return log.content
+
+
+@logbook_bp.route("/logs/<log_id>/edit", methods=["POST"])
+def update_log_content(log_id):
+    new_content = request.form["text"]
+    log = LogItem.get(LogItem.id == log_id)
+    log.content = new_content
+    log.save()
+    return redirect(url_for("logbook.index_next_pages"))
+
+
+# deleting with a post as forms do not support DELETE and I
+# am trying to stay javascript-free
+@logbook_bp.route("/logs/<log_id>/delete", methods=["POST"])
+def delete_log_entry(log_id):
+    log = LogItem.get(LogItem.id == log_id)
+    log.delete_instance()
+    return redirect(url_for("logbook.index_next_pages"))
