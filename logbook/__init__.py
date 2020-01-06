@@ -5,6 +5,8 @@ from flask_assets import Environment, Bundle
 app = Flask(__name__)
 app.config.from_object("logbook.default_settings")
 app.config.from_pyfile("../settings.cfg")
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 
 # use blueprint to set base url
 logbook_bp = Blueprint(
