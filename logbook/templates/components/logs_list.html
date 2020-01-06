@@ -1,0 +1,15 @@
+<div class="ui divided items">
+    {% for item in items %}
+    <div id="{{ item.id }}" class="item">
+        <div class="content">
+            <div class="meta blue">
+                <span>{{ item.timestamp }}</span>
+                <a class="right floated" href="{{ url_for('logbook.update_log_content', log_id = item.id) }}">EDIT</a>
+            </div>
+            <div class="description">
+                <p>{{ item.content | safe }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

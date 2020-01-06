@@ -1,0 +1,11 @@
+<div class="ui basic segment clearing padded">
+    {% if page_nr > 1 %}
+    <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr - 1) }}">
+        <button type="submit" class="ui left floated button">Newer</button>
+    </form>
+    {% endif %} {% if items|length == 20 %}
+    <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr + 1) }}">
+        <button type="submit" class="ui right floated button">Older</button>
+    </form>
+    {% endif %}
+</div>
