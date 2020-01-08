@@ -1,12 +1,25 @@
 import os
 from flask import Flask, Blueprint, redirect
 from flask_assets import Environment, Bundle
+from flask_login import LoginManager
+from logbook.models import User
 
 app = Flask(__name__)
 app.config.from_object("logbook.default_settings")
 app.config.from_pyfile("../settings.cfg")
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+
+login_manager = LoginManager()
+login_manager.login_view = "auth.login"
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    # since the user_id is just the primary key of our user table, use it in the query for the user
+    return User.get_or_none(User.id == user_id)
+
 
 # use blueprint to set base url
 logbook_bp = Blueprint(
@@ -41,3 +54,7 @@ if not app.debug:
 from logbook import controllers, views
 
 app.register_blueprint(logbook_bp, url_prefix="/{}".format(app.config["BASE_URL"]))
+
+from logbook.auth import auth
+
+app.register_blueprint(auth, url_prefix="/{}".format(app.config["BASE_URL"]))

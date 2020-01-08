@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="column is-4 is-offset-4">
+        <h3>Login</h3>
+        <div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div>
+                {{ messages[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <form method="POST" action="/logbook/login">
+                <div>
+                    <div>
+                        <input type="text" name="username" placeholder="Username" autofocus="">
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <input type="password" name="password" placeholder="Your Password">
+                    </div>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+                </div>
+                <button>Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
