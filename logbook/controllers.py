@@ -3,9 +3,11 @@ from logbook.models import LogItem
 from logbook import logbook_bp
 import markdown2
 from flask import jsonify, request, redirect, url_for
+from flask_login import login_required
 
 
 @logbook_bp.route("/logs", methods=["POST"])
+@login_required
 def store_log():
     item = LogItem(content=request.form["text"])
     item.save()
@@ -36,6 +38,7 @@ def get_log_content(log_id):
 
 
 @logbook_bp.route("/logs/<log_id>/edit", methods=["POST"])
+@login_required
 def update_log_content(log_id):
     new_content = request.form["text"]
     log = LogItem.get(LogItem.id == log_id)
@@ -47,6 +50,7 @@ def update_log_content(log_id):
 # deleting with a post as forms do not support DELETE and I
 # am trying to stay javascript-free
 @logbook_bp.route("/logs/<log_id>/delete", methods=["POST"])
+@login_required
 def delete_log_entry(log_id):
     log = LogItem.get(LogItem.id == log_id)
     log.delete_instance()
