@@ -19,18 +19,11 @@ def login_post():
 
     user = User.get_or_none(User.username == username)
 
-    # check if user actually exists
-    if user is None:
-        return redirect(url_for("auth.login"))
-
-    # take the user supplied password, hash it, and compare it to the hashed password in database
-    if not user or not check_password_hash(user.password, password):
+    # inform the user if the username/password is wrong
+    if user is None or not check_password_hash(user.password, password):
         flash("Please check your login details and try again.")
-        return redirect(
-            url_for("logbook.index_next_pages")
-        )  # if user doesn't exist or password is wrong, reload the page
+        return redirect(url_for("logbook.index_next_pages"))
 
-    # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
     return redirect(url_for("logbook.index_next_pages"))
 
@@ -51,7 +44,7 @@ def signup_post():
     )  # if this returns a user, then the email already exists in database
 
     if user is not None:
-        flash("Email address already exists")
+        flash("Username already exists")
         return redirect(url_for("auth.signup"))
 
     # create new user with the form data. Hash the password so plaintext version isn't saved.
@@ -63,8 +56,8 @@ def signup_post():
     return redirect(url_for("auth.login"))
 
 
-@auth.route("/logout")
+@auth.route("/logout", methods=["POST"])
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("logbook.index_next_pages"))
+    return redirect(url_for("auth.login"))

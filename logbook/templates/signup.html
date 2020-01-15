@@ -1,41 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Signup</title>
-</head>
+{% block content %}
+<div class="bg-blue-700">
+    <div class="container m-auto flex content-center h-screen">
+        <div class="flex-auto bg-gray-200 p-4 m-auto max-w-sm rounded shadow-2xl">
+            <img class="h-16 m-auto px-2 pb-2 pt-0 mb-4"
+                src="{{ url_for('logbook.static', filename='img/logo-dark.svg') }}" />
+            <form method="POST" action="{{ url_for('auth.signup') }}" class="flex flex-col ">
+                <label class="form-label">Username</label>
+                <input class="mb-4 input" type="text" name="username" placeholder="Username" autofocus="">
+                <label class="form-label">Password</label>
+                <input class="mb-4 input" type="password" name="password" placeholder="Password">
 
-<body>
-    <div class="column is-4 is-offset-4">
-        <h3>Sign Up</h3>
-        <div>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <div>
-                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
-            </div>
-            {% endif %}
-            {% endwith %}
-            <form method="POST" action="/logbook/signup">
-                <div>
-                    <div>
-                        <input type="text" name="username" placeholder="Username" autofocus="">
-                    </div>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="text-red-600 text-sm font-bold mb-2">
+                    {{ messages[0] }}. Go to <a class="text-blue-700 hover:text-blue-800"
+                        href="{{ url_for('auth.login') }}">login page</a>.
                 </div>
-
-                <div>
-                    <div>
-                        <input type="password" name="password" placeholder="Password">
-                    </div>
-                </div>
-
-                <button>Sign Up</button>
+                {% endif %}
+                {% endwith %}
+                <button class="button button-primary">Sign Up</button>
             </form>
         </div>
     </div>
-</body>
-
-</html>
+</div>
+{% endblock %}

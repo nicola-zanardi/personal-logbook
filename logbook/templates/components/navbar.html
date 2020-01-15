@@ -1,0 +1,18 @@
+<nav class="sticky top-0 h-16 bg-white border-b border-blue-100 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3"
+    id="navbar">
+    <div class="flex items-center px-4 py-3 sm:p-0 w-full">
+        <div class="w-1/2 lg:w-1/5 text-left">
+            <a href="{{ url_for('logbook.index_next_pages') }}">
+                <img class="h-8" src="{{ url_for('logbook.static', filename='img/logo-dark.svg') }}" />
+            </a>
+        </div>
+        <div class="hidden sm:flex sm:w-3/5 justify-center">
+            <input class="input flex-grow max-w-xl lg:max-w-2xl bg-gray-200 focus:bg-white transition-bg" type="text"
+                placeholder="Search" />
+        </div>
+        <form method="POST" action="{{ url_for('auth.logout') }}" class="w-1/2 lg:w-1/5 text-right">
+            <button class="button text-blue-700 hover:text-white hover:bg-blue-800 transition-bg transition-text"
+                style="margin-right: 0;">LOGOUT</button>
+        </form>
+    </div>
+</nav>
