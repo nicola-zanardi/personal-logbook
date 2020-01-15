@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "logbook"
 version = "0.2.0"
-# description = ""
+description = "A logbook for our everyday human activities"
 authors = ["Nicola Zanardi <mildlyinteresting@posteo.net>"]
 
 [tool.poetry.dependencies]
@@ -14,6 +14,7 @@ pygments = "^2.4"
 flask-assets = "^0.12.0"
 flask-login = "^0.4.1"
 gunicorn = "^20.0"
+poetry = "^1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^19.3b0"
