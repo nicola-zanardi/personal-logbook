@@ -13,3 +13,4 @@ logbook/static/gen
 logbook/static/vendor/semantic-ui/src
 logbook/static/vendor/semantic-ui/tasks
 logbook/static/vendor/semantic-ui/gulpfile.js
+node_modules

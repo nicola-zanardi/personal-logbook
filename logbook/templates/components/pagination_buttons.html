@@ -1,11 +1,11 @@
-<div class="ui basic segment clearing padded">
+<div class="flex flex-row justify-between">
     {% if page_nr > 1 %}
     <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr - 1) }}">
-        <button type="submit" class="ui left floated button">Newer</button>
+        <button class="button button-secondary" type="submit">Newer</button>
     </form>
     {% endif %} {% if items|length == 20 %}
     <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr + 1) }}">
-        <button type="submit" class="ui right floated button">Older</button>
+        <button class="button button-secondary" type="submit">Older</button>
     </form>
     {% endif %}
 </div>

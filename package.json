@@ -1,0 +1,37 @@
+{
+  "name": "personal-logbook",
+  "version": "0.1.0",
+  "description": "Personal Logbook",
+  "main": "run.py",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "python run.py --debug",
+    "build-css": "postcss logbook/static/css/main.css -o logbook/static/vendor/tailwind-css/tailwind.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicola-zen/personal-logbook.git"
+  },
+  "keywords": [
+    "personal",
+    "logbook",
+    "python",
+    "flask"
+  ],
+  "author": "Nicola Zanardi",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/nicola-zen/personal-logbook/issues"
+  },
+  "homepage": "https://github.com/nicola-zen/personal-logbook#readme",
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^1.3.0",
+    "autoprefixer": "^9.7.3",
+    "cssnano": "^4.1.10",
+    "postcss-cli": "^7.0.0",
+    "tailwindcss": "^1.1.4",
+    "tailwindcss-transitions": "^2.1.0"
+  }
+}

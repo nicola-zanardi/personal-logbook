@@ -1,17 +1,48 @@
-#logform {
-  margin-top: calc(2.85714286em);
-  padding: 0;
+@tailwind base;
+@tailwind components;
+
+.input {
+  @apply appearance-none shadow rounded py-2 px-3 text-gray-700;
 }
 
-#navbar > div.text.container {
-  font-size: 1em;
-  max-width: calc(700px + 2 * 1.14286em) !important;
+.input:focus {
+  @apply outline-none shadow-outline;
 }
 
-#logform-segment {
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: none;
-  padding: 1em 0;
+.form-label {
+  @apply text-gray-700 text-sm font-bold mb-2;
 }
+
+.button {
+  @apply font-bold py-2 px-4 rounded shadow my-1;
+}
+
+.button:hover {
+  @apply shadow-none;
+}
+
+.button-primary {
+  @apply bg-blue-700 text-white;
+}
+
+.button-primary:hover {
+  @apply bg-blue-800 transition-bg;
+}
+
+.button-secondary {
+  @apply bg-gray-300 text-gray-600;
+}
+
+.button-secondary:hover {
+  @apply bg-gray-400 text-gray-700 transition-bg;
+}
+
+.button-danger {
+  @apply bg-white text-red-600;
+}
+
+.button-danger:hover {
+  @apply bg-red-600 text-white transition-bg;
+}
+
+@tailwind utilities;

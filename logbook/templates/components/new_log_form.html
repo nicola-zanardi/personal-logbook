@@ -1,19 +1,9 @@
-<div id="logform-segment" class="ui secondary segment">
-    <div class="ui text container">
-        <div id="logform" class="ui basic clearing segment">
-            <div class="ui form">
-                <form action="{{ url_for('logbook.store_log') }}" method="post">
-                    <div class="field">
-                        <textarea type="msg" placeholder="What's up?" name="text"></textarea>
-                    </div>
-                    <button class="ui button primary right floated" type="submit">
-                        Log
-                    </button>
-                    <button class="ui button basic right floated" type="reset" value="Reset">
-                        Clear
-                    </button>
-                </form>
-            </div>
+<div class="w-full mt-2 mb-6" id="logform-segment">
+    <form class="flex flex-col" action="{{ url_for('logbook.store_log') }}" method="post">
+        <textarea class="input transition-all" type="msg" placeholder="What's up?" name="text"></textarea>
+        <div class="flex flex-row-reverse justify-start">
+            <button class="button button-primary" type="submit">Log</button>
+            <button class="button button-secondary mx-2" type="reset" value="Reset">Clear</button>
         </div>
-    </div>
+    </form>
 </div>

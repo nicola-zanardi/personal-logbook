@@ -1,29 +1,24 @@
-{% extends "base.html" %}
+{% extends "base_nav.html" %}
 
 {% block content %}
-<div id="logform-segment" class="ui secondary segment">
-  <div class="ui text container">
-    <div id="logform" class="ui basic clearing segment">
-      <div class="ui form">
-        <form action="{{ url_for('logbook.update_log_content', log_id = log_id) }}" method="post">
-          <div class="field">
-            <textarea type="msg" name="text">{{ content }}</textarea>
-          </div>
-          <button class="ui button primary right floated" type="submit">
-            Update Log
-          </button>
-          <a href="/">
-            <button class="ui button basic right floated">
-              Cancel
-            </button></a>
-        </form>
-        <form action="{{ url_for('logbook.delete_log_entry', log_id = log_id) }}" method="post">
-          <button class="ui button negative left floated" type="submit">
-            Delete Log
-          </button>
-        </form>
-      </div>
-    </div>
+<div class="mx-auto max-w-2xl px-4">
+  <div class="w-full my-2" id="logform">
+    <form class="" action="{{ url_for('logbook.update_log_content', log_id = log_id) }}" method="post">
+      <textarea class="input w-full " type="msg" name="text">{{ content }}</textarea>
+      <button class="float-right button button-primary" type="submit">
+        Update Log
+      </button>
+    </form>
+    <a class="float-right button button-secondary mx-2" href="/">
+      <button>
+        Cancel
+      </button>
+    </a>
+    <form action="{{ url_for('logbook.delete_log_entry', log_id = log_id) }}" method="post">
+      <button class="float-left button button-danger transition-all" type="submit">
+        Delete Log
+      </button>
+    </form>
   </div>
 </div>
 {% endblock content %}

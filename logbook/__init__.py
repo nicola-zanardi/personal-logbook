@@ -1,8 +1,9 @@
 import os
-from flask import Flask, Blueprint, redirect
+from flask import Flask, Blueprint, redirect, url_for
 from flask_assets import Environment, Bundle
 from flask_login import LoginManager
 from logbook.models import User
+from logbook.helpers import get_random_border_style
 
 app = Flask(__name__)
 app.config.from_object("logbook.default_settings")
@@ -29,10 +30,9 @@ logbook_bp = Blueprint(
 
 assets = Environment(app)
 css = Bundle(
-    "vendor/semantic-ui/semantic.css",
+    "vendor/tailwind-css/tailwind.css",
     "css/pygments.css",
-    "css/main.css",
-    filters="cleancss",
+    # "css/main.css",
     output="{}/gen/main.css".format(app.config["BASE_URL"]),
 )
 assets.register("main_css", css)
@@ -58,3 +58,12 @@ app.register_blueprint(logbook_bp, url_prefix="/{}".format(app.config["BASE_URL"
 from logbook.auth import auth
 
 app.register_blueprint(auth, url_prefix="/{}".format(app.config["BASE_URL"]))
+
+app.jinja_env.globals.update(get_random_border_style=get_random_border_style)
+
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def catch_all(path):
+    """ Send any unmatched route to the login page """
+    return redirect(url_for("auth.login"))
