@@ -2,10 +2,10 @@
     <div class="flex flex-row justify-between bg-gray-100-70 px-4 px-2 rounded-lg">
         {% if page_nr > 1 %}
         <a href="{{ url_for('logbook.index_next_pages') ~ (page_nr - 1) }}" class="order-last">
-            <button class="button button-secondary mx-1" type="submit">▶</button>
+            <button class="button button-secondary mx-1" type="submit">▶&#xFE0E;</button>
         </a>
         {% else %}
-        <div class="py-2 px-4 my-1 mx-1 opacity-0 order-last">▶</div>
+        <div class="py-2 px-4 my-1 mx-1 opacity-0 order-last">▶&#xFE0E;</div>
         {% endif %}
 
         <a href="{{ url_for('logbook.create_new_log') }}">
@@ -14,10 +14,10 @@
 
         {% if items|length == 20 %}
         <a href="{{ url_for('logbook.index_next_pages') ~ (page_nr + 1) }}" class="order-first">
-            <button class="button button-secondary mx-1" type="submit">◀</button>
+            <button class="button button-secondary mx-1" type="submit">◀&#xFE0E;</button>
         </a>
         {% else %}
-        <div class="py-2 px-4 my-1 mx-1 opacity-0 order-first">◀</div>
+        <div class="py-2 px-4 my-1 mx-1 opacity-0 order-first">◀&#xFE0E;</div>
         {% endif %}
         </divs>
     </div>
