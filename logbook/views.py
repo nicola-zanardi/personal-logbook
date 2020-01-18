@@ -19,3 +19,9 @@ def index_next_pages(page_nr):
 def get_log_entry(log_id):
     content = get_log_content(log_id)
     return render_template("edit_log.html", content=content, log_id=int(log_id))
+
+
+@logbook_bp.route("/logs/new", methods=["GET"])
+@login_required
+def create_new_log():
+    return render_template("new_log_form.html")

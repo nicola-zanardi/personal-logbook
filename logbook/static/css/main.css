@@ -45,4 +45,8 @@
   @apply bg-red-600 text-white transition-bg;
 }
 
+.bg-gray-100-70 {
+  background-color: rgba(247, 250, 252, 0.7);
+}
+
 @tailwind utilities;

@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from flask_login import login_required, login_user, logout_user
 from logbook.models import User, db
+from peewee import fn
 
 auth = Blueprint("auth", __name__)
 
@@ -17,7 +19,7 @@ def login_post():
     password = request.form.get("password")
     remember = True if request.form.get("remember") else False
 
-    user = User.get_or_none(User.username == username)
+    user = User.get_or_none(fn.Lower(User.username) == username.lower())
 
     # inform the user if the username/password is wrong
     if user is None or not check_password_hash(user.password, password):
@@ -36,11 +38,11 @@ def signup():
 @auth.route("/signup", methods=["POST"])
 def signup_post():
 
-    username = request.form.get("username")
+    username = request.form.get("username").lower()
     password = request.form.get("password")
 
     user = User.get_or_none(
-        User.username == username
+        fn.Lower(User.username) == username
     )  # if this returns a user, then the email already exists in database
 
     if user is not None:

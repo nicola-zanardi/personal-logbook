@@ -1,11 +1,23 @@
-<div class="flex flex-row justify-between">
-    {% if page_nr > 1 %}
-    <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr - 1) }}">
-        <button class="button button-secondary" type="submit">Newer</button>
-    </form>
-    {% endif %} {% if items|length == 20 %}
-    <form action="{{ url_for('logbook.index_next_pages') ~ (page_nr + 1) }}">
-        <button class="button button-secondary" type="submit">Older</button>
-    </form>
-    {% endif %}
-</div>
+<div class="fixed bottom-0 inset-x-0 mb-6 flex justify-center">
+    <div class="flex flex-row justify-between bg-gray-100-70 px-4 px-2 rounded-lg">
+        {% if page_nr > 1 %}
+        <a href="{{ url_for('logbook.index_next_pages') ~ (page_nr - 1) }}" class="order-last">
+            <button class="button button-secondary mx-1" type="submit">▶</button>
+        </a>
+        {% else %}
+        <div class="py-2 px-4 my-1 mx-1 opacity-0 order-last">▶</div>
+        {% endif %}
+
+        <a href="{{ url_for('logbook.create_new_log') }}">
+            <button id="new-log" class="button button-primary mx-1 rounded">Log</button>
+        </a>
+
+        {% if items|length == 20 %}
+        <a href="{{ url_for('logbook.index_next_pages') ~ (page_nr + 1) }}" class="order-first">
+            <button class="button button-secondary mx-1" type="submit">◀</button>
+        </a>
+        {% else %}
+        <div class="py-2 px-4 my-1 mx-1 opacity-0 order-first">◀</div>
+        {% endif %}
+        </divs>
+    </div>

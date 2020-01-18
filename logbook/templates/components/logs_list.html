@@ -1,6 +1,6 @@
 <div>
     {% for item in items %}
-    <div class="mx-auto max-w-2xl p-4 border-t-4 {{ get_random_border_style() }}" id="{{ item.id }}">
+    <div class="mx-auto max-w-2xl p-4 border-t-4 {{ get_random_border_style() }} first:border-none" id="{{ item.id }}">
         <div class="flex justify-between mt-2">
             <span class="text-gray-600 text-sm font-semibold">{{ item.timestamp }}</span>
             <a class="text-gray-600 text-sm font-semibold hover:text-blue-800 transition-text"
@@ -8,9 +8,10 @@
         </div>
         {{ item.content 
                 | replace("<p>", "<p class='py-1'>") 
-                | replace("<a>", "<a class='text-blue-700 hover:text-white hover:bg-blue-700 transition-text transition-bg'>") 
-                | replace("<blockquote>", "<blockquote class='ml-6 p-2 italic bg-gray-200 border-l-4 border-gray-400'>") 
-                | safe 
+                | replace("<a href", "<a class='text-blue-700 hover:text-white hover:bg-blue-700 transition-text transition-bg' href") 
+                | replace("<blockquote>", "<blockquote class='ml-6 p-2 italic bg-gray-200 border-l-4 border-gray-400'>")| replace("<blockquote>", "<blockquote class='ml-6 p-2 italic bg-gray-200 border-l-4 border-gray-400'>")
+                | replace("<code>", "<code class='font-mono bg-red-100 px-1 text-red-700'>")
+                | safe
             }}
     </div>
     {% endfor %}

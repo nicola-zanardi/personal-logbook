@@ -1,0 +1,11 @@
+{% extends "base_nav.html" %}
+
+{% block center_element %}
+{% include "components/search_nav_bar.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-2xl px-4">
+    {% include "components/new_log_form.html" %}
+</div>
+{% endblock %}
